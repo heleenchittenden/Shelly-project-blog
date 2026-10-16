@@ -4,123 +4,419 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shelly | Project Showcase</title>
+  <meta name="description" content="Shelly is a visual scheduling application for sporting facilities, combining equipment layouts, class schedules and booking availability.">
+  <title>Shelly — Visual Facility Scheduling</title>
+
   <style>
+    :root {
+      --ink: #202b40;
+      --muted: #66738a;
+      --accent: #5267d8;
+      --pale: #eef0ff;
+      --line: #e5e8f0;
+      --surface: #ffffff;
+      --background: #f8f9fc;
+    }
+
     * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      font-family: system-ui, sans-serif;
-      color: #243047;
-      background: #f7f8fc;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--background);
       line-height: 1.7;
     }
 
-    header {
-      padding: 72px 24px;
+    a { color: var(--accent); }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px max(24px, calc((100% - 1080px) / 2));
+      background: white;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 1.35rem;
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+
+    .nav a:not(.brand) {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .hero {
+      padding: 100px 24px 90px;
+      background: linear-gradient(135deg, #edf0ff, #f9faff 70%);
       text-align: center;
-      background: #18233f;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 16px 0;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1.08;
+      letter-spacing: -0.065em;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 20px auto;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 9px;
+      background: var(--accent);
       color: white;
+      font-weight: 700;
+      text-decoration: none;
     }
 
-    header h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
-      margin: 0 0 12px;
-    }
-
-    header p {
-      max-width: 650px;
-      margin: 0 auto;
-      color: #d7def1;
+    .button.secondary {
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--line);
     }
 
     main {
-      max-width: 850px;
-      margin: 40px auto;
-      padding: 0 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px;
     }
 
-    section {
-      background: white;
-      padding: 28px;
-      margin-bottom: 24px;
+    section { padding: 64px 0; }
+
+    .section-heading {
+      max-width: 680px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      letter-spacing: -0.04em;
+      line-height: 1.2;
+      margin: 10px 0 16px;
+    }
+
+    h3 { margin-top: 0; }
+
+    .lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 16px;
-      box-shadow: 0 4px 20px #18233f0a;
+      padding: 26px;
     }
 
-    h2 { margin-top: 0; }
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--pale);
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
 
-    .placeholder {
-      padding: 36px 20px;
-      background: #eef1f8;
-      border-radius: 12px;
+    .card p { color: var(--muted); margin-bottom: 0; }
+
+    .visual {
+      display: grid;
+      place-items: center;
+      min-height: 240px;
+      padding: 28px;
+      border: 1px dashed #bdc6e2;
+      border-radius: 14px;
+      background: #f0f2fb;
+      color: var(--muted);
       text-align: center;
-      color: #53617a;
     }
 
-    a { color: #3759b5; }
+    .visual strong {
+      display: block;
+      color: var(--ink);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tech {
+      padding: 8px 13px;
+      background: var(--pale);
+      color: #3449a8;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .callout {
+      padding: 28px;
+      background: #202b40;
+      color: white;
+      border-radius: 16px;
+    }
+
+    .callout p { color: #d6dced; }
 
     footer {
+      padding: 36px 24px;
       text-align: center;
-      padding: 30px;
-      color: #657089;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 650px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 70px 22px; }
+      section { padding: 44px 0; }
+      .nav { padding: 16px 20px; }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Shelly</h1>
-    <p>A project exploring a problem, a solution, and the engineering behind it.</p>
+  <nav class="nav">
+    <a class="brand" href="#">shelly.</a>
+    <a href="#project">Explore the project ↓</a>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">Software engineering project</div>
+    <h1>Make every booking<br>easier to see.</h1>
+    <p>
+      Shelly brings facility layouts, class schedules and equipment
+      bookings together in one visual scheduling application for
+      sporting facilities.
+    </p>
+    <div class="hero-actions">
+      <a class="button" href="#demo">Watch the demo ↓</a>
+      <a class="button secondary" href="#technical">Explore the technology</a>
+    </div>
   </header>
 
   <main>
-    <section>
-      <h2>Overview</h2>
-      <p>
-        Introduce Shelly here. Explain what it does, who it is for,
-        and why you decided to build it.
-      </p>
-    </section>
+    <section id="project">
+      <div class="section-heading">
+        <div class="eyebrow">01 / The problem</div>
+        <h2>Scheduling physical spaces shouldn't be a puzzle.</h2>
+        <p class="lead">
+          Sporting facilities need to coordinate equipment across
+          multiple classes and activities. When schedules are managed
+          on paper or across disconnected tools, finding available
+          equipment and avoiding booking conflicts takes extra effort.
+        </p>
+      </div>
 
-    <section>
-      <h2>The problem</h2>
-      <p>
-        Describe the problem you wanted to solve and why it matters.
-      </p>
-    </section>
-
-    <section>
-      <h2>The solution</h2>
-      <p>
-        Explain how Shelly works and the main features you built.
-      </p>
-    </section>
-
-    <section>
-      <h2>How it works</h2>
-      <div class="placeholder">
-        Architecture diagram or project screenshots will go here.
+      <div class="callout">
+        <h3>The idea behind Shelly</h3>
+        <p>
+          Give facility staff a clear, visual way to understand their
+          space, see equipment availability and coordinate bookings
+          with class schedules.
+        </p>
       </div>
     </section>
 
-    <section>
-      <h2>Watch the demo</h2>
-      <div class="placeholder">
-        Your demo video will go here.
+    <section id="features">
+      <div class="section-heading">
+        <div class="eyebrow">02 / The solution</div>
+        <h2>One facility. Two ways to plan.</h2>
+        <p class="lead">
+          Shelly connects the physical layout of a facility with the
+          schedules that determine how its equipment is used.
+        </p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="number">01</div>
+          <h3>Map the facility</h3>
+          <p>
+            In setup mode, arrange equipment as blocks on a visual
+            map of the facility. Create a spatial representation of
+            the equipment that needs to be scheduled.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">02</div>
+          <h3>Explore equipment schedules</h3>
+          <p>
+            In booking mode, select an equipment block on the map
+            to view its schedule and make bookings for specific
+            classes and time slots.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">03</div>
+          <h3>Plan from the class perspective</h3>
+          <p>
+            View an individual class's schedule and book the
+            equipment it needs, keeping the activity and its
+            requirements at the centre of the workflow.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="number">04</div>
+          <h3>Check availability before booking</h3>
+          <p>
+            When selecting equipment for a requested time slot,
+            see whether it is available. This helps staff identify
+            conflicts before committing to a booking.
+          </p>
+        </article>
       </div>
     </section>
 
-    <section>
-      <h2>Technical highlights</h2>
-      <p>
-        Describe the architecture, technology choices, interesting
-        engineering challenges, and lessons learned.
-      </p>
+    <section id="screenshots">
+      <div class="section-heading">
+        <div class="eyebrow">03 / See it in action</div>
+        <h2>Designed around the way people use a facility.</h2>
+        <p class="lead">
+          The map connects equipment in physical space with the
+          schedules that govern its use.
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="visual">
+          <div>
+            <strong>Facility map</strong>
+            Screenshot of the equipment layout goes here.
+          </div>
+        </div>
+        <div class="visual">
+          <div>
+            <strong>Booking and availability</strong>
+            Screenshot of an equipment schedule goes here.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="section-heading">
+        <div class="eyebrow">04 / Product walkthrough</div>
+        <h2>See how Shelly works.</h2>
+        <p class="lead">
+          A short walkthrough of the facility setup, scheduling
+          and equipment booking workflows.
+        </p>
+      </div>
+
+      <div class="visual">
+        <div>
+          <strong>Demo video coming soon</strong>
+          Your Shelly walkthrough will appear here.
+        </div>
+      </div>
+    </section>
+
+    <section id="technical">
+      <div class="section-heading">
+        <div class="eyebrow">05 / Under the hood</div>
+        <h2>A practical web application.</h2>
+        <p class="lead">
+          Shelly uses a JavaScript frontend and a Node.js backend.
+          Application records are currently stored as JSON files.
+        </p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Frontend</h3>
+          <p>
+            Built with JavaScript and Vite, providing the interface
+            for facility setup, schedules and equipment bookings.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Backend and data</h3>
+          <p>
+            A Node.js backend supports the application, with records
+            persisted in JSON files.
+          </p>
+        </article>
+      </div>
+
+      <div class="tech-list">
+        <span class="tech">JavaScript</span>
+        <span class="tech">Vite</span>
+        <span class="tech">Node.js</span>
+        <span class="tech">JSON file storage</span>
+      </div>
+    </section>
+
+    <section id="learnings">
+      <div class="section-heading">
+        <div class="eyebrow">06 / Engineering reflections</div>
+        <h2>From a real-world problem to a working product.</h2>
+        <p class="lead">
+          Building Shelly is an opportunity to explore how interface
+          design, scheduling logic and data persistence come together
+          to solve a practical operational problem.
+        </p>
+        <p>
+          As the project evolves, this section will cover the
+          engineering decisions, trade-offs, challenges and lessons
+          learned along the way.
+        </p>
+      </div>
     </section>
   </main>
 
   <footer>
-    Shelly · Project showcase
+    Shelly · A sporting facility scheduling project
   </footer>
 </body>
 </html>
